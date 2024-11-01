@@ -40,7 +40,7 @@ h3 {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-section {
@@ -50,7 +50,7 @@ h3 {
 .ingredient-columns {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 10px;
 }
 
 .column {
@@ -65,7 +65,7 @@ h3 {
     border-radius: 4px;
     padding: 8px 12px;
     font-size: 14px;
-    margin: 5px 0;
+    margin: 5px 0; /* Reduced margin to bring buttons closer */
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
