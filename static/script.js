@@ -19,12 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function findRecipes() {
-    const errorMessage = document.getElementById("error-message");
+    // Display alert if less than three ingredients are selected
     if (selectedIngredients.length < 3) {
-        errorMessage.style.display = "block";  // Show error if less than three ingredients
+        alert("Oops! Please select at least three ingredients.");
         return;
-    } else {
-        errorMessage.style.display = "none";  // Hide error if three or more ingredients are selected
     }
 
     // Send selected ingredients to the backend
@@ -42,12 +40,12 @@ async function findRecipes() {
     ['Combat', 'Utility', 'Whimsy'].forEach(type => {
         const column = document.createElement('div');
         column.classList.add('recipe-column');
-        column.innerHTML = `<h3>${type} Potions</h3>`;
+        column.innerHTML = `<h3>${type}</h3>`;
 
         if (recipes[type] && recipes[type].length > 0) {
             column.innerHTML += recipes[type].map(recipe => {
                 const ingredientsList = recipe.ingredients.map(ing => {
-                    const rarityClass = ing.rarity.toLowerCase();  // Convert rarity to lowercase for CSS class
+                    const rarityClass = ing.rarity.toLowerCase();  // Apply rarity class to ingredient background
                     return `<li class="ingredient ${rarityClass}">${ing.name} [${ing.combat}/${ing.utility}/${ing.whimsy}]</li>`;
                 }).join('');
                 return `<h4>${recipe.potion_type} ${recipe.attribute_totals}</h4><ul>${ingredientsList}</ul>`;
@@ -57,6 +55,9 @@ async function findRecipes() {
         }
         resultsDiv.appendChild(column);
     });
+
+    // Automatically scroll to the results section
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Function to clear selected ingredients
@@ -66,5 +67,4 @@ function clearSelection() {
         button.classList.remove("selected", "common", "uncommon", "rare");
     });
     document.getElementById("results").innerHTML = ''; // Clear results as well
-    document.getElementById("error-message").style.display = "none";  // Hide error message on clear
 }

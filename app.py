@@ -51,31 +51,25 @@ def get_recipes():
         total_utility = sum([ing['utility'] for ing in combo])
         total_whimsy = sum([ing['whimsy'] for ing in combo])
 
-        # Determine the potion type and handle ties by creating multiple recipes if needed
+        # Determine potion type(s) based on the highest scores, excluding any zero-score attributes
         recipe_types = []
-        if total_combat > total_utility and total_combat > total_whimsy:
+        if total_combat > 0 and total_combat >= total_utility and total_combat >= total_whimsy:
             recipe_types.append(("Combat", total_combat))
-        if total_utility > total_combat and total_utility > total_whimsy:
+        if total_utility > 0 and total_utility >= total_combat and total_utility >= total_whimsy:
             recipe_types.append(("Utility", total_utility))
-        if total_whimsy > total_combat and total_whimsy > total_utility:
+        if total_whimsy > 0 and total_whimsy >= total_combat and total_whimsy >= total_utility:
             recipe_types.append(("Whimsy", total_whimsy))
-        
-        # If there's a tie between any of the attributes, add both tied recipes
-        if len(recipe_types) == 0:  # All three are tied
-            recipe_types = [("Combat", total_combat), ("Utility", total_utility), ("Whimsy", total_whimsy)]
-        elif len(recipe_types) == 2:  # Two are tied
-            recipe_types = recipe_types
 
-        # Add recipes to the result for each type in recipe_types
+        # Add recipes to the result only if a valid potion type is determined
         for potion_type, potion_value in recipe_types:
-            # Fetch the appropriate potion name from the dictionary (converting the number to a string for lookup)
+            # Fetch the appropriate potion name from the dictionary (using string for lookup)
             potion_name = ""
             if potion_type == "Combat":
-                potion_name = f"{potion_value}. {combat_names.get(str(potion_value), 'Unknown')}"
+                potion_name = f"{potion_value}. {combat_names.get(str(potion_value), 'No matching potion')}"
             elif potion_type == "Utility":
-                potion_name = f"{potion_value}. {utility_names.get(str(potion_value), 'Unknown')}"
+                potion_name = f"{potion_value}. {utility_names.get(str(potion_value), 'No matching potion')}"
             elif potion_type == "Whimsy":
-                potion_name = f"{potion_value}. {whimsy_names.get(str(potion_value), 'Unknown')}"
+                potion_name = f"{potion_value}. {whimsy_names.get(str(potion_value), 'No matching potion')}"
 
             recipe = {
                 "potion_type": potion_name,
