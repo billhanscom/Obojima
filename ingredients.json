@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Narutomaki",
+        "rarity": "C",
+        "combat": 0,
+        "utility": 0,
+        "whimsy": 0
+    },
+    {
+        "name": "Seashell",
+        "rarity": "C",
+        "combat": 0,
+        "utility": 0,
+        "whimsy": 1
+    },
+    {
+        "name": "Seawater",
+        "rarity": "C",
+        "combat": 1,
+        "utility": 0,
+        "whimsy": 0
+    }
+]

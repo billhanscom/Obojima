@@ -1,12 +1,11 @@
 from flask import Flask, request, jsonify, render_template
-import sqlite3
-from itertools import combinations
 import json
-import re  # Importing re for extracting numerical values
+from itertools import combinations
+import re
 
 app = Flask(__name__)
 
-# Load potion names from JSON file
+# Load potion names and ingredient data from JSON files
 with open('potion_names.json') as f:
     potion_names_data = json.load(f)
 
@@ -14,11 +13,8 @@ combat_names = potion_names_data["combat_names"]
 utility_names = potion_names_data["utility_names"]
 whimsy_names = potion_names_data["whimsy_names"]
 
-# Database connection helper function
-def get_db_connection():
-    conn = sqlite3.connect('recipes.db')
-    conn.row_factory = sqlite3.Row  # Access columns by name
-    return conn
+with open('ingredients.json') as f:
+    ingredient_data = json.load(f)
 
 # Helper function to sort recipes numerically by potion number
 def extract_number(potion_name):
@@ -28,13 +24,10 @@ def extract_number(potion_name):
 # Route to the main page to display the ingredient selection form
 @app.route('/')
 def index():
-    conn = get_db_connection()
-    ingredients = conn.execute("SELECT name, rarity, combat, utility, whimsy FROM ingredients").fetchall()
-    conn.close()
     # Separate ingredients by rarity for display in columns
-    common_ingredients = [ing for ing in ingredients if ing['rarity'] == 'C']
-    uncommon_ingredients = [ing for ing in ingredients if ing['rarity'] == 'U']
-    rare_ingredients = [ing for ing in ingredients if ing['rarity'] == 'R']
+    common_ingredients = [ing for ing in ingredient_data if ing['rarity'] == 'C']
+    uncommon_ingredients = [ing for ing in ingredient_data if ing['rarity'] == 'U']
+    rare_ingredients = [ing for ing in ingredient_data if ing['rarity'] == 'R']
     return render_template('index.html', common_ingredients=common_ingredients,
                            uncommon_ingredients=uncommon_ingredients, rare_ingredients=rare_ingredients)
 
@@ -42,17 +35,13 @@ def index():
 @app.route('/get-recipes', methods=['POST'])
 def get_recipes():
     user_ingredients = request.json['ingredients']  # Get selected ingredients
-    conn = get_db_connection()
 
-    # Retrieve ingredient details for each selected ingredient
-    placeholders = ','.join('?' * len(user_ingredients))
-    query = f"SELECT name, rarity, combat, utility, whimsy FROM ingredients WHERE name IN ({placeholders})"
-    ingredient_data = conn.execute(query, user_ingredients).fetchall()
-    conn.close()
+    # Filter selected ingredient details from JSON data
+    selected_ingredients = [ing for ing in ingredient_data if ing['name'] in user_ingredients]
 
     # Calculate all possible recipes from every combination of three ingredients
     possible_recipes = {'Combat': [], 'Utility': [], 'Whimsy': []}
-    for combo in combinations(ingredient_data, 3):
+    for combo in combinations(selected_ingredients, 3):
         total_combat = sum([ing['combat'] for ing in combo])
         total_utility = sum([ing['utility'] for ing in combo])
         total_whimsy = sum([ing['whimsy'] for ing in combo])
@@ -79,7 +68,7 @@ def get_recipes():
 
             recipe = {
                 "potion_type": potion_name,
-                "attribute_totals": f"[{total_combat}/{total_utility}/{total_whimsy}]",
+                "attribute_totals": f"[{total_combat}-{total_utility}-{total_whimsy}]",
                 "ingredients": [
                     {
                         "name": ing["name"],
