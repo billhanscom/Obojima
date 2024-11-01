@@ -68,7 +68,7 @@ def get_recipes():
 
         # Add recipes to the result for each type in recipe_types
         for potion_type, potion_value in recipe_types:
-            # Fetch the appropriate potion name from the dictionary
+            # Fetch the appropriate potion name from the dictionary (converting the number to a string for lookup)
             potion_name = ""
             if potion_type == "Combat":
                 potion_name = f"{potion_value}. {combat_names.get(str(potion_value), 'Unknown')}"

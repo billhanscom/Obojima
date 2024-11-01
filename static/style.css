@@ -65,7 +65,7 @@ h3 {
     border-radius: 4px;
     padding: 8px 12px;
     font-size: 14px;
-    margin: 3px 0; /* Reduced margin to achieve 60% reduction in spacing */
+    margin: 2px 0; /* Further reduced margin for closer spacing */
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
