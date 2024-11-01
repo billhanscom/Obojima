@@ -16,7 +16,12 @@ def index():
     conn = get_db_connection()
     ingredients = conn.execute("SELECT name, rarity, combat, utility, whimsy FROM ingredients").fetchall()
     conn.close()
-    return render_template('index.html', ingredients=ingredients)
+    # Separate ingredients by rarity for display in columns
+    common_ingredients = [ing for ing in ingredients if ing['rarity'] == 'C']
+    uncommon_ingredients = [ing for ing in ingredients if ing['rarity'] == 'U']
+    rare_ingredients = [ing for ing in ingredients if ing['rarity'] == 'R']
+    return render_template('index.html', common_ingredients=common_ingredients,
+                           uncommon_ingredients=uncommon_ingredients, rare_ingredients=rare_ingredients)
 
 # Calculate all possible recipes based on selected ingredients
 @app.route('/get-recipes', methods=['POST'])
@@ -31,7 +36,7 @@ def get_recipes():
     conn.close()
 
     # Calculate all possible recipes from every combination of three ingredients
-    possible_recipes = []
+    possible_recipes = {'Combat': [], 'Utility': [], 'Whimsy': []}
     for combo in combinations(ingredient_data, 3):
         total_combat = sum([ing['combat'] for ing in combo])
         total_utility = sum([ing['utility'] for ing in combo])
@@ -61,7 +66,11 @@ def get_recipes():
                 } for ing in combo
             ]
         }
-        possible_recipes.append(recipe)
+        possible_recipes[potion_type].append(recipe)
+
+    # Sort each potion type's recipes alphabetically by potion type
+    for potions in possible_recipes.values():
+        potions.sort(key=lambda x: x['potion_type'])
 
     # Return list of possible recipes as JSON
     return jsonify(possible_recipes)

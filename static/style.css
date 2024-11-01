@@ -3,7 +3,7 @@ body {
     margin: 20px;
 }
 
-h1 {
+h1, h3 {
     color: #333;
 }
 
@@ -11,9 +11,49 @@ h1 {
     margin-bottom: 20px;
 }
 
-#results p {
+.ingredient-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    width: 30%;
+}
+
+.common {
+    color: green;
+}
+
+.uncommon {
+    color: yellow;
+}
+
+.rare {
+    color: red;
+}
+
+#results {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.recipe-column {
+    width: 30%;
+}
+
+#results h3 {
+    color: #0056b3;
+}
+
+#results ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#results li {
     background-color: #f2f2f2;
-    padding: 10px;
+    padding: 8px;
     margin: 5px 0;
     border: 1px solid #ddd;
 }

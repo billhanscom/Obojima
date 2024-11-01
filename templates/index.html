@@ -11,15 +11,42 @@
     <!-- Ingredient selection form -->
     <form id="ingredientForm">
         <label>Select Ingredients:</label><br>
-        {% for ingredient in ingredients %}
-            <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-            {{ ingredient['name'] }} ({{ ingredient['rarity'] }}): 
-            [Combat: {{ ingredient['combat'] }}, Utility: {{ ingredient['utility'] }}, Whimsy: {{ ingredient['whimsy'] }}]<br>
-        {% endfor %}
+
+        <div class="ingredient-columns">
+            <!-- Common Ingredients Column -->
+            <div class="column">
+                <h3>Common Ingredients</h3>
+                {% for ingredient in common_ingredients %}
+                    <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
+                    <span class="common">{{ ingredient['name'] }}</span> [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                {% endfor %}
+            </div>
+
+            <!-- Uncommon Ingredients Column -->
+            <div class="column">
+                <h3>Uncommon Ingredients</h3>
+                {% for ingredient in uncommon_ingredients %}
+                    <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
+                    <span class="uncommon">{{ ingredient['name'] }}</span> [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                {% endfor %}
+            </div>
+
+            <!-- Rare Ingredients Column -->
+            <div class="column">
+                <h3>Rare Ingredients</h3>
+                {% for ingredient in rare_ingredients %}
+                    <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
+                    <span class="rare">{{ ingredient['name'] }}</span> [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                {% endfor %}
+            </div>
+        </div>
+        
         <button type="button" onclick="findRecipes()">Find Recipes</button>
     </form>
 
-    <div id="results"></div>
+    <div id="results" class="recipe-columns">
+        <!-- Results will be displayed in this section -->
+    </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

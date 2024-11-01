@@ -10,17 +10,26 @@ async function findRecipes() {
         body: JSON.stringify({ ingredients: selectedIngredients })
     });
 
-    // Display each possible recipe from the response
+    // Display each possible recipe from the response in columns by potion type
     const recipes = await response.json();
     const resultsDiv = document.getElementById('results');
-    if (recipes.length > 0) {
-        resultsDiv.innerHTML = recipes.map(recipe => {
-            const ingredientsList = recipe.ingredients.map(ing => `
-                <li>${ing.name} (${ing.rarity}): [Combat: ${ing.combat}, Utility: ${ing.utility}, Whimsy: ${ing.whimsy}]</li>
-            `).join('');
-            return `<h3>${recipe.potion_type}</h3><ul>${ingredientsList}</ul>`;
-        }).join('');
-    } else {
-        resultsDiv.innerHTML = '<p>No matching recipes found</p>';
-    }
+    resultsDiv.innerHTML = '';
+
+    ['Combat', 'Utility', 'Whimsy'].forEach(type => {
+        const column = document.createElement('div');
+        column.classList.add('recipe-column');
+        column.innerHTML = `<h3>${type} Potions</h3>`;
+
+        if (recipes[type] && recipes[type].length > 0) {
+            column.innerHTML += recipes[type].map(recipe => {
+                const ingredientsList = recipe.ingredients.map(ing => `
+                    <li><span class="${ing.rarity.toLowerCase()}">${ing.name}</span> [${ing.combat}/${ing.utility}/${ing.whimsy}]</li>
+                `).join('');
+                return `<h4>${recipe.potion_type}</h4><ul>${ingredientsList}</ul>`;
+            }).join('');
+        } else {
+            column.innerHTML += '<p>No recipes found</p>';
+        }
+        resultsDiv.appendChild(column);
+    });
 }
