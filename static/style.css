@@ -56,7 +56,6 @@ h3 {
 .column {
     width: 32%;
     padding: 10px;
-    line-height: 1.4; /* Reduced line spacing within each column */
 }
 
 .ingredient-button {
@@ -66,7 +65,7 @@ h3 {
     border-radius: 4px;
     padding: 8px 12px;
     font-size: 14px;
-    margin: 5px 0;
+    margin: 3px 0; /* Reduced margin to achieve 60% reduction in spacing */
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
