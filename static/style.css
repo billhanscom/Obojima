@@ -23,7 +23,7 @@ header {
 
 h1 {
     font-family: 'Abril Fatface', serif;
-    font-size: 58px; /* Increased by 60% for larger title */
+    font-size: 58px; /* Larger title size */
     color: #333333;
     margin-bottom: 10px;
 }
@@ -37,9 +37,11 @@ h2 {
 
 .recipes-title h2 {
     font-family: 'Abril Fatface', serif;
-    font-size: 28px;
+    font-size: 32px; /* Larger "Recipes" section title */
     text-align: center;
+    color: #333333;
     margin-top: 40px;
+    margin-bottom: 30px;
 }
 
 h3 {

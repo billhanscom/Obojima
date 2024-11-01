@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import sqlite3
 from itertools import combinations
 import json
+import re  # Importing re for extracting numerical values
 
 app = Flask(__name__)
 
@@ -18,6 +19,11 @@ def get_db_connection():
     conn = sqlite3.connect('recipes.db')
     conn.row_factory = sqlite3.Row  # Access columns by name
     return conn
+
+# Helper function to sort recipes numerically by potion number
+def extract_number(potion_name):
+    match = re.match(r"(\d+)", potion_name)
+    return int(match.group(0)) if match else float('inf')  # Sort "Unknown" or non-numeric values last
 
 # Route to the main page to display the ingredient selection form
 @app.route('/')
@@ -86,9 +92,9 @@ def get_recipes():
             }
             possible_recipes[potion_type].append(recipe)
 
-    # Sort each potion type's recipes alphabetically by potion type
-    for potions in possible_recipes.values():
-        potions.sort(key=lambda x: x['potion_type'])
+    # Sort each potion type's recipes numerically by potion number
+    for potion_list in possible_recipes.values():
+        potion_list.sort(key=lambda x: extract_number(x['potion_type']))
 
     # Return list of possible recipes as JSON
     return jsonify(possible_recipes)
