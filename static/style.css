@@ -8,7 +8,7 @@ body {
 
 .container {
     width: 80%;
-    max-width: 900px;
+    max-width: 1000px;  /* Increased width to allow for wider columns */
     margin: 60px auto;
     padding: 20px;
     background-color: #ffffff;
@@ -54,7 +54,7 @@ h3 {
 }
 
 .column {
-    width: 30%;
+    width: 32%;  /* Increased column width for better readability */
     padding: 10px;
 }
 
@@ -92,7 +92,7 @@ h3 {
 }
 
 .recipe-column {
-    width: 30%;
+    width: 32%;
 }
 
 #results h3 {
