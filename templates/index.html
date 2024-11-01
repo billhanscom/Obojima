@@ -6,46 +6,52 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Obojima Potion Recipe Finder</h1>
-    <h2>Select Ingredients to Generate Potion Recipes</h2>
+    <div class="container">
+        <header>
+            <h1>Obojima Potion Recipe Finder</h1>
+            <h2>Select Ingredients to Generate Potion Recipes</h2>
+        </header>
 
-    <!-- Ingredient selection form -->
-    <form id="ingredientForm">
-        <div class="ingredient-columns">
-            <!-- Common Ingredients Column -->
-            <div class="column">
-                <h3>Common Ingredients</h3>
-                {% for ingredient in common_ingredients %}
-                    <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br><br>
-                {% endfor %}
+        <!-- Ingredient selection form -->
+        <form id="ingredientForm" class="form-section">
+            <div class="ingredient-columns">
+                <!-- Common Ingredients Column -->
+                <div class="column">
+                    <h3>Common Ingredients</h3>
+                    {% for ingredient in common_ingredients %}
+                        <label><input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
+                        {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]</label><br><br>
+                    {% endfor %}
+                </div>
+
+                <!-- Uncommon Ingredients Column -->
+                <div class="column">
+                    <h3>Uncommon Ingredients</h3>
+                    {% for ingredient in uncommon_ingredients %}
+                        <label><input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
+                        {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]</label><br><br>
+                    {% endfor %}
+                </div>
+
+                <!-- Rare Ingredients Column -->
+                <div class="column">
+                    <h3>Rare Ingredients</h3>
+                    {% for ingredient in rare_ingredients %}
+                        <label><input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
+                        {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]</label><br><br>
+                    {% endfor %}
+                </div>
             </div>
 
-            <!-- Uncommon Ingredients Column -->
-            <div class="column">
-                <h3>Uncommon Ingredients</h3>
-                {% for ingredient in uncommon_ingredients %}
-                    <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br><br>
-                {% endfor %}
+            <div class="button-group">
+                <button type="button" onclick="findRecipes()">Find Recipes</button>
+                <button type="button" onclick="clearSelection()">Clear Selection</button>
             </div>
+        </form>
 
-            <!-- Rare Ingredients Column -->
-            <div class="column">
-                <h3>Rare Ingredients</h3>
-                {% for ingredient in rare_ingredients %}
-                    <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br><br>
-                {% endfor %}
-            </div>
+        <div id="results" class="recipe-columns">
+            <!-- Results will be displayed in this section -->
         </div>
-        
-        <button type="button" onclick="findRecipes()">Find Recipes</button>
-        <button type="button" onclick="clearSelection()">Clear Selection</button>
-    </form>
-
-    <div id="results" class="recipe-columns">
-        <!-- Results will be displayed in this section -->
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
