@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Potion Recipe Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Select Ingredients to Generate a Potion Recipe</h1>
+
+    <!-- Ingredient selection form -->
+    <form id="ingredientForm">
+        <label>Select Ingredients:</label><br>
+        {% for ingredient in ingredients %}
+            <input type="checkbox" name="ingredient" value="{{ ingredient }}"> {{ ingredient }}<br>
+        {% endfor %}
+        <button type="button" onclick="findRecipes()">Find Recipe</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
