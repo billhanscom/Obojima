@@ -19,8 +19,9 @@
                 <div class="column">
                     <h3>Common Ingredients</h3>
                     {% for ingredient in common_ingredients %}
-                        <label><input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                        {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]</label><br><br>
+                        <button type="button" class="ingredient-button" data-ingredient="{{ ingredient['name'] }}">
+                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]
+                        </button><br><br>
                     {% endfor %}
                 </div>
 
@@ -28,8 +29,9 @@
                 <div class="column">
                     <h3>Uncommon Ingredients</h3>
                     {% for ingredient in uncommon_ingredients %}
-                        <label><input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                        {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]</label><br><br>
+                        <button type="button" class="ingredient-button" data-ingredient="{{ ingredient['name'] }}">
+                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]
+                        </button><br><br>
                     {% endfor %}
                 </div>
 
@@ -37,8 +39,9 @@
                 <div class="column">
                     <h3>Rare Ingredients</h3>
                     {% for ingredient in rare_ingredients %}
-                        <label><input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                        {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]</label><br><br>
+                        <button type="button" class="ingredient-button" data-ingredient="{{ ingredient['name'] }}">
+                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]
+                        </button><br><br>
                     {% endfor %}
                 </div>
             </div>

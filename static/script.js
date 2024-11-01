@@ -1,7 +1,25 @@
+let selectedIngredients = [];
+
+// Toggle selection for ingredient buttons
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".ingredient-button").forEach(button => {
+        button.addEventListener("click", () => {
+            const ingredient = button.getAttribute("data-ingredient");
+            button.classList.toggle("selected");
+            if (selectedIngredients.includes(ingredient)) {
+                selectedIngredients = selectedIngredients.filter(i => i !== ingredient);
+            } else {
+                selectedIngredients.push(ingredient);
+            }
+        });
+    });
+});
+
 async function findRecipes() {
-    // Get selected ingredients
-    const selectedIngredients = Array.from(document.querySelectorAll('input[name="ingredient"]:checked'))
-                                      .map(checkbox => checkbox.value);
+    if (selectedIngredients.length === 0) {
+        alert("Please select at least one ingredient.");
+        return;
+    }
 
     // Send selected ingredients to the backend
     const response = await fetch('/get-recipes', {
@@ -36,6 +54,9 @@ async function findRecipes() {
 
 // Function to clear selected ingredients
 function clearSelection() {
-    document.querySelectorAll('input[name="ingredient"]:checked').forEach(checkbox => checkbox.checked = false);
+    selectedIngredients = [];
+    document.querySelectorAll(".ingredient-button").forEach(button => {
+        button.classList.remove("selected");
+    });
     document.getElementById('results').innerHTML = ''; // Clear results as well
 }
