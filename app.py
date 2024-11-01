@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import sqlite3
 
+# Create Flask application instance
 app = Flask(__name__)
 
 # Database connection helper function
@@ -48,5 +49,6 @@ def get_recipes():
     recipe_result = {"recipe_type": recipe_type, "recipe_score": recipe_score}
     return jsonify(recipe_result)
 
+# Run the application only if this is the main module (for local testing)
 if __name__ == '__main__':
     app.run(debug=True)
