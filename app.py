@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import sqlite3
+from itertools import combinations
 
-# Create Flask application instance
 app = Flask(__name__)
 
 # Database connection helper function
@@ -14,41 +14,57 @@ def get_db_connection():
 @app.route('/')
 def index():
     conn = get_db_connection()
-    ingredients = conn.execute("SELECT name FROM ingredients").fetchall()  # Get list of ingredients
+    ingredients = conn.execute("SELECT name, rarity, combat, utility, whimsy FROM ingredients").fetchall()
     conn.close()
-    return render_template('index.html', ingredients=[row['name'] for row in ingredients])
+    return render_template('index.html', ingredients=ingredients)
 
-# Calculate recipes based on selected ingredients
+# Calculate all possible recipes based on selected ingredients
 @app.route('/get-recipes', methods=['POST'])
 def get_recipes():
-    user_ingredients = request.json['ingredients']  # Get selected ingredients from the request
+    user_ingredients = request.json['ingredients']  # Get selected ingredients
     conn = get_db_connection()
-    
-    # Retrieve ingredient scores
-    query = "SELECT combat, utility, whimsy FROM ingredients WHERE name IN ({})".format(','.join(['?'] * len(user_ingredients)))
+
+    # Retrieve ingredient details for each selected ingredient
+    placeholders = ','.join('?' * len(user_ingredients))
+    query = f"SELECT name, rarity, combat, utility, whimsy FROM ingredients WHERE name IN ({placeholders})"
     ingredient_data = conn.execute(query, user_ingredients).fetchall()
     conn.close()
 
-    # Calculate total attribute scores
-    total_combat = sum([row['combat'] for row in ingredient_data])
-    total_utility = sum([row['utility'] for row in ingredient_data])
-    total_whimsy = sum([row['whimsy'] for row in ingredient_data])
+    # Calculate all possible recipes from every combination of three ingredients
+    possible_recipes = []
+    for combo in combinations(ingredient_data, 3):
+        total_combat = sum([ing['combat'] for ing in combo])
+        total_utility = sum([ing['utility'] for ing in combo])
+        total_whimsy = sum([ing['whimsy'] for ing in combo])
 
-    # Determine the recipe type based on highest score
-    if total_combat > total_utility and total_combat > total_whimsy:
-        recipe_type = "Combat"
-        recipe_score = total_combat
-    elif total_utility > total_combat and total_utility > total_whimsy:
-        recipe_type = "Utility"
-        recipe_score = total_utility
-    else:
-        recipe_type = "Whimsy"
-        recipe_score = total_whimsy
+        # Determine the potion type and value based on highest score
+        if total_combat > total_utility and total_combat > total_whimsy:
+            potion_type = "Combat"
+            potion_value = total_combat
+        elif total_utility > total_combat and total_utility > total_whimsy:
+            potion_type = "Utility"
+            potion_value = total_utility
+        else:
+            potion_type = "Whimsy"
+            potion_value = total_whimsy
 
-    # Send recipe type and score back to frontend
-    recipe_result = {"recipe_type": recipe_type, "recipe_score": recipe_score}
-    return jsonify(recipe_result)
+        # Format each recipe result with details
+        recipe = {
+            "potion_type": f"{potion_type} {potion_value}",
+            "ingredients": [
+                {
+                    "name": ing["name"],
+                    "rarity": ing["rarity"],
+                    "combat": ing["combat"],
+                    "utility": ing["utility"],
+                    "whimsy": ing["whimsy"]
+                } for ing in combo
+            ]
+        }
+        possible_recipes.append(recipe)
 
-# Run the application only if this is the main module (for local testing)
+    # Return list of possible recipes as JSON
+    return jsonify(possible_recipes)
+
 if __name__ == '__main__':
     app.run(debug=True)
