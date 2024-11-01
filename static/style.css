@@ -1,5 +1,5 @@
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
@@ -22,18 +22,21 @@ header {
 }
 
 h1 {
-    font-size: 26px;
+    font-family: 'Abril Fatface', serif;
+    font-size: 32px;
     color: #333333;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 h2 {
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #777777;
     font-weight: normal;
 }
 
 h3 {
+    font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     color: #444444;
     font-weight: bold;
@@ -65,14 +68,24 @@ h3 {
     border-radius: 4px;
     padding: 8px 12px;
     font-size: 14px;
-    margin: 1px 0; /* Minimized margin for compact vertical spacing */
+    margin: 0;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
-.ingredient-button.selected {
-    background-color: #0077cc;
-    color: #ffffff;
+.ingredient-button.selected.common {
+    background-color: #c2e3a7; /* Common: light green */
+    color: #333;
+}
+
+.ingredient-button.selected.uncommon {
+    background-color: #fde663; /* Uncommon: yellow */
+    color: #333;
+}
+
+.ingredient-button.selected.rare {
+    background-color: #fd8966; /* Rare: coral */
+    color: #333;
 }
 
 .button-group {
@@ -127,6 +140,19 @@ h3 {
     border-radius: 5px;
     border: 1px solid #e0e0e0;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Rarity-based background colors for ingredients in recipe results */
+.ingredient.common {
+    background-color: #c2e3a7; /* Common: light green */
+}
+
+.ingredient.uncommon {
+    background-color: #fde663; /* Uncommon: yellow */
+}
+
+.ingredient.rare {
+    background-color: #fd8966; /* Rare: coral */
 }
 
 /* Print-friendly styles */
