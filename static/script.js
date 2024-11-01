@@ -12,6 +12,7 @@ async function findRecipes() {
 
     // Display each possible recipe from the response in columns by potion type
     const recipes = await response.json();
+    window.generatedRecipes = recipes;  // Store recipes globally for export
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
 
@@ -32,6 +33,33 @@ async function findRecipes() {
         }
         resultsDiv.appendChild(column);
     });
+}
+
+// Export PDF function
+async function exportPDF() {
+    const selectedIngredients = Array.from(document.querySelectorAll('input[name="ingredient"]:checked'))
+                                      .map(checkbox => checkbox.value);
+    const recipes = window.generatedRecipes;
+
+    if (!recipes || !selectedIngredients.length) {
+        alert("Please select ingredients and generate recipes first.");
+        return;
+    }
+
+    const response = await fetch('/export-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ingredients: selectedIngredients, recipes: recipes })
+    });
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'potion_recipe_report.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // Function to clear selected ingredients
