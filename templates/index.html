@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Potion Recipe Finder</title>
+    <title>Obojima Potion Recipe Finder</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Select Ingredients to Generate Potion Recipes</h1>
+    <h1>Obojima Potion Recipe Finder</h1>
+    <h2>Select Ingredients to Generate Potion Recipes</h2>
 
     <!-- Ingredient selection form -->
     <form id="ingredientForm">
@@ -16,7 +17,7 @@
                 <h3>Common Ingredients</h3>
                 {% for ingredient in common_ingredients %}
                     <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br><br>
                 {% endfor %}
             </div>
 
@@ -25,7 +26,7 @@
                 <h3>Uncommon Ingredients</h3>
                 {% for ingredient in uncommon_ingredients %}
                     <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br><br>
                 {% endfor %}
             </div>
 
@@ -34,7 +35,7 @@
                 <h3>Rare Ingredients</h3>
                 {% for ingredient in rare_ingredients %}
                     <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br><br>
                 {% endfor %}
             </div>
         </div>
