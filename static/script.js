@@ -10,10 +10,17 @@ async function findRecipes() {
         body: JSON.stringify({ ingredients: selectedIngredients })
     });
 
-    // Display the recipe result from the backend
-    const recipe = await response.json();
+    // Display each possible recipe from the response
+    const recipes = await response.json();
     const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = recipe
-        ? `<p>Recipe Type: ${recipe.recipe_type}</p><p>Score: ${recipe.recipe_score}</p>`
-        : '<p>No matching recipe found</p>';
+    if (recipes.length > 0) {
+        resultsDiv.innerHTML = recipes.map(recipe => {
+            const ingredientsList = recipe.ingredients.map(ing => `
+                <li>${ing.name} (${ing.rarity}): [Combat: ${ing.combat}, Utility: ${ing.utility}, Whimsy: ${ing.whimsy}]</li>
+            `).join('');
+            return `<h3>${recipe.potion_type}</h3><ul>${ingredientsList}</ul>`;
+        }).join('');
+    } else {
+        resultsDiv.innerHTML = '<p>No matching recipes found</p>';
+    }
 }

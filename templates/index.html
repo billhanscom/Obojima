@@ -6,15 +6,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Select Ingredients to Generate a Potion Recipe</h1>
+    <h1>Select Ingredients to Generate Potion Recipes</h1>
 
     <!-- Ingredient selection form -->
     <form id="ingredientForm">
         <label>Select Ingredients:</label><br>
         {% for ingredient in ingredients %}
-            <input type="checkbox" name="ingredient" value="{{ ingredient }}"> {{ ingredient }}<br>
+            <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
+            {{ ingredient['name'] }} ({{ ingredient['rarity'] }}): 
+            [Combat: {{ ingredient['combat'] }}, Utility: {{ ingredient['utility'] }}, Whimsy: {{ ingredient['whimsy'] }}]<br>
         {% endfor %}
-        <button type="button" onclick="findRecipes()">Find Recipe</button>
+        <button type="button" onclick="findRecipes()">Find Recipes</button>
     </form>
 
     <div id="results"></div>
