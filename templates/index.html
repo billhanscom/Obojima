@@ -10,15 +10,13 @@
 
     <!-- Ingredient selection form -->
     <form id="ingredientForm">
-        <label>Select Ingredients:</label><br>
-
         <div class="ingredient-columns">
             <!-- Common Ingredients Column -->
             <div class="column">
                 <h3>Common Ingredients</h3>
                 {% for ingredient in common_ingredients %}
                     <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    <span class="common">{{ ingredient['name'] }}</span> [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
                 {% endfor %}
             </div>
 
@@ -27,7 +25,7 @@
                 <h3>Uncommon Ingredients</h3>
                 {% for ingredient in uncommon_ingredients %}
                     <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    <span class="uncommon">{{ ingredient['name'] }}</span> [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
                 {% endfor %}
             </div>
 
@@ -36,12 +34,13 @@
                 <h3>Rare Ingredients</h3>
                 {% for ingredient in rare_ingredients %}
                     <input type="checkbox" name="ingredient" value="{{ ingredient['name'] }}">
-                    <span class="rare">{{ ingredient['name'] }}</span> [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
+                    {{ ingredient['name'] }} [{{ ingredient['combat'] }}/{{ ingredient['utility'] }}/{{ ingredient['whimsy'] }}]<br>
                 {% endfor %}
             </div>
         </div>
         
         <button type="button" onclick="findRecipes()">Find Recipes</button>
+        <button type="button" onclick="clearSelection()">Clear Selection</button>
     </form>
 
     <div id="results" class="recipe-columns">

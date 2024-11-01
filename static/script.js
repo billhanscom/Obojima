@@ -23,7 +23,7 @@ async function findRecipes() {
         if (recipes[type] && recipes[type].length > 0) {
             column.innerHTML += recipes[type].map(recipe => {
                 const ingredientsList = recipe.ingredients.map(ing => `
-                    <li><span class="${ing.rarity.toLowerCase()}">${ing.name}</span> [${ing.combat}/${ing.utility}/${ing.whimsy}]</li>
+                    <li>${ing.name} [${ing.combat}/${ing.utility}/${ing.whimsy}]</li>
                 `).join('');
                 return `<h4>${recipe.potion_type} ${recipe.attribute_totals}</h4><ul>${ingredientsList}</ul>`;
             }).join('');
@@ -32,4 +32,10 @@ async function findRecipes() {
         }
         resultsDiv.appendChild(column);
     });
+}
+
+// Function to clear selected ingredients
+function clearSelection() {
+    document.querySelectorAll('input[name="ingredient"]:checked').forEach(checkbox => checkbox.checked = false);
+    document.getElementById('results').innerHTML = ''; // Clear results as well
 }
