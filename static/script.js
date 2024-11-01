@@ -25,7 +25,7 @@ async function findRecipes() {
                 const ingredientsList = recipe.ingredients.map(ing => `
                     <li><span class="${ing.rarity.toLowerCase()}">${ing.name}</span> [${ing.combat}/${ing.utility}/${ing.whimsy}]</li>
                 `).join('');
-                return `<h4>${recipe.potion_type}</h4><ul>${ingredientsList}</ul>`;
+                return `<h4>${recipe.potion_type} ${recipe.attribute_totals}</h4><ul>${ingredientsList}</ul>`;
             }).join('');
         } else {
             column.innerHTML += '<p>No recipes found</p>';

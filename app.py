@@ -53,9 +53,10 @@ def get_recipes():
             potion_type = "Whimsy"
             potion_value = total_whimsy
 
-        # Format each recipe result with details
+        # Format each recipe result with details and total attributes
         recipe = {
             "potion_type": f"{potion_type} {potion_value}",
+            "attribute_totals": f"[{total_combat}/{total_utility}/{total_whimsy}]",
             "ingredients": [
                 {
                     "name": ing["name"],
