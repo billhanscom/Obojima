@@ -37,16 +37,22 @@ async function findRecipes() {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
 
-    ['Combat', 'Utility', 'Whimsy'].forEach(type => {
+    const columnHeaders = {
+        "Combat": "Combat Potions",
+        "Utility": "Utility Potions",
+        "Whimsy": "Whimsy Potions"
+    };
+
+    ["Combat", "Utility", "Whimsy"].forEach(type => {
         const column = document.createElement('div');
         column.classList.add('recipe-column');
-        column.innerHTML = `<h3>${type}</h3>`;
+        column.innerHTML = `<h3>${columnHeaders[type]}</h3>`;
 
         if (recipes[type] && recipes[type].length > 0) {
             column.innerHTML += recipes[type].map(recipe => {
                 const ingredientsList = recipe.ingredients.map(ing => {
                     const rarityClass = ing.rarity.toLowerCase();  // Apply rarity class to ingredient background
-                    return `<li class="ingredient ${rarityClass}">${ing.name} [${ing.combat}/${ing.utility}/${ing.whimsy}]</li>`;
+                    return `<li class="ingredient ${rarityClass}">${ing.name} [${ing.combat}-${ing.utility}-${ing.whimsy}]</li>`;
                 }).join('');
                 return `<h4>${recipe.potion_type} ${recipe.attribute_totals}</h4><ul>${ingredientsList}</ul>`;
             }).join('');

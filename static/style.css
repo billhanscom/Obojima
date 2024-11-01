@@ -35,13 +35,16 @@ h2 {
     font-weight: normal;
 }
 
+.recipes-title {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
 .recipes-title h2 {
     font-family: 'Abril Fatface', serif;
-    font-size: 32px; /* Larger "Recipes" section title */
-    text-align: center;
+    font-size: 32px; /* "Recipes" section title in Abril Fatface */
     color: #333333;
-    margin-top: 40px;
-    margin-bottom: 30px;
 }
 
 h3 {
@@ -143,7 +146,6 @@ h3 {
 }
 
 #results li {
-    background-color: #f9fafb;
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
