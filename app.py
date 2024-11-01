@@ -1,8 +1,17 @@
 from flask import Flask, request, jsonify, render_template
 import sqlite3
 from itertools import combinations
+import json
 
 app = Flask(__name__)
+
+# Load potion names from JSON file
+with open('potion_names.json') as f:
+    potion_names_data = json.load(f)
+
+combat_names = potion_names_data["combat_names"]
+utility_names = potion_names_data["utility_names"]
+whimsy_names = potion_names_data["whimsy_names"]
 
 # Database connection helper function
 def get_db_connection():
@@ -59,8 +68,17 @@ def get_recipes():
 
         # Add recipes to the result for each type in recipe_types
         for potion_type, potion_value in recipe_types:
+            # Fetch the appropriate potion name from the dictionary
+            potion_name = ""
+            if potion_type == "Combat":
+                potion_name = f"{potion_value}. {combat_names.get(str(potion_value), 'Unknown')}"
+            elif potion_type == "Utility":
+                potion_name = f"{potion_value}. {utility_names.get(str(potion_value), 'Unknown')}"
+            elif potion_type == "Whimsy":
+                potion_name = f"{potion_value}. {whimsy_names.get(str(potion_value), 'Unknown')}"
+
             recipe = {
-                "potion_type": f"{potion_type} {potion_value}",
+                "potion_type": potion_name,
                 "attribute_totals": f"[{total_combat}/{total_utility}/{total_whimsy}]",
                 "ingredients": [
                     {
