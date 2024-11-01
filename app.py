@@ -1,9 +1,6 @@
-from flask import Flask, request, jsonify, render_template, send_file
+from flask import Flask, request, jsonify, render_template
 import sqlite3
 from itertools import combinations
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from io import BytesIO
 
 app = Flask(__name__)
 
@@ -45,32 +42,37 @@ def get_recipes():
         total_utility = sum([ing['utility'] for ing in combo])
         total_whimsy = sum([ing['whimsy'] for ing in combo])
 
-        # Determine the potion type and value based on highest score
+        # Determine the potion type and handle ties by creating multiple recipes if needed
+        recipe_types = []
         if total_combat > total_utility and total_combat > total_whimsy:
-            potion_type = "Combat"
-            potion_value = total_combat
-        elif total_utility > total_combat and total_utility > total_whimsy:
-            potion_type = "Utility"
-            potion_value = total_utility
-        else:
-            potion_type = "Whimsy"
-            potion_value = total_whimsy
+            recipe_types.append(("Combat", total_combat))
+        if total_utility > total_combat and total_utility > total_whimsy:
+            recipe_types.append(("Utility", total_utility))
+        if total_whimsy > total_combat and total_whimsy > total_utility:
+            recipe_types.append(("Whimsy", total_whimsy))
+        
+        # If there's a tie between any of the attributes, add both tied recipes
+        if len(recipe_types) == 0:  # All three are tied
+            recipe_types = [("Combat", total_combat), ("Utility", total_utility), ("Whimsy", total_whimsy)]
+        elif len(recipe_types) == 2:  # Two are tied
+            recipe_types = recipe_types
 
-        # Format each recipe result with details and total attributes
-        recipe = {
-            "potion_type": f"{potion_type} {potion_value}",
-            "attribute_totals": f"[{total_combat}/{total_utility}/{total_whimsy}]",
-            "ingredients": [
-                {
-                    "name": ing["name"],
-                    "rarity": ing["rarity"],
-                    "combat": ing["combat"],
-                    "utility": ing["utility"],
-                    "whimsy": ing["whimsy"]
-                } for ing in combo
-            ]
-        }
-        possible_recipes[potion_type].append(recipe)
+        # Add recipes to the result for each type in recipe_types
+        for potion_type, potion_value in recipe_types:
+            recipe = {
+                "potion_type": f"{potion_type} {potion_value}",
+                "attribute_totals": f"[{total_combat}/{total_utility}/{total_whimsy}]",
+                "ingredients": [
+                    {
+                        "name": ing["name"],
+                        "rarity": ing["rarity"],
+                        "combat": ing["combat"],
+                        "utility": ing["utility"],
+                        "whimsy": ing["whimsy"]
+                    } for ing in combo
+                ]
+            }
+            possible_recipes[potion_type].append(recipe)
 
     # Sort each potion type's recipes alphabetically by potion type
     for potions in possible_recipes.values():
@@ -78,59 +80,6 @@ def get_recipes():
 
     # Return list of possible recipes as JSON
     return jsonify(possible_recipes)
-
-# Generate PDF report of selected ingredients and recipes
-@app.route('/export-pdf', methods=['POST'])
-def export_pdf():
-    data = request.json
-    selected_ingredients = data['ingredients']
-    recipes = data['recipes']
-
-    # Create a PDF in memory
-    buffer = BytesIO()
-    c = canvas.Canvas(buffer, pagesize=letter)
-    width, height = letter
-
-    # Title
-    c.setFont("Helvetica-Bold", 16)
-    c.drawString(50, height - 50, "Potion Recipe Report")
-
-    # Selected Ingredients
-    y_position = height - 80
-    c.setFont("Helvetica", 12)
-    c.drawString(50, y_position, "Selected Ingredients:")
-    y_position -= 20
-
-    for ingredient in selected_ingredients:
-        c.drawString(60, y_position, f"{ingredient['name']} ({ingredient['rarity']}) [Combat: {ingredient['combat']}, Utility: {ingredient['utility']}, Whimsy: {ingredient['whimsy']}]")
-        y_position -= 15
-
-    # Recipes
-    y_position -= 20
-    c.setFont("Helvetica-Bold", 14)
-    c.drawString(50, y_position, "Generated Recipes:")
-    y_position -= 20
-    c.setFont("Helvetica", 12)
-
-    for potion_type, recipe_list in recipes.items():
-        c.drawString(50, y_position, f"{potion_type} Potions:")
-        y_position -= 20
-        for recipe in recipe_list:
-            c.drawString(60, y_position, f"{recipe['potion_type']} {recipe['attribute_totals']}")
-            y_position -= 15
-            for ingredient in recipe['ingredients']:
-                c.drawString(80, y_position, f"{ingredient['name']} ({ingredient['rarity']}) [Combat: {ingredient['combat']}, Utility: {ingredient['utility']}, Whimsy: {ingredient['whimsy']}]")
-                y_position -= 15
-            y_position -= 10
-
-            if y_position < 50:
-                c.showPage()
-                y_position = height - 50
-
-    c.save()
-    buffer.seek(0)
-
-    return send_file(buffer, as_attachment=True, download_name="potion_recipe_report.pdf", mimetype='application/pdf')
 
 if __name__ == '__main__':
     app.run(debug=True)

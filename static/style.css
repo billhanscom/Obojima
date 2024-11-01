@@ -69,3 +69,17 @@ h3 {
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
+
+/* Print-friendly styles */
+@media print {
+    body {
+        background-color: #ffffff;
+        color: #000;
+    }
+    #ingredientForm button {
+        display: none; /* Hide buttons during print */
+    }
+    #ingredientForm, .recipe-columns {
+        page-break-inside: avoid;
+    }
+}
