@@ -34,7 +34,7 @@ h2 {
     font-weight: 400;
     font-style: normal;    
     font-size: 24px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     color: #577da1;
 }
 
@@ -110,6 +110,7 @@ h3 {
 .button-group {
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .button-group button {
