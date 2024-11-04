@@ -10,7 +10,7 @@ body {
     width: 80%;
     max-width: 1000px;
     margin: 60px auto;
-    padding: 20px;
+    padding: 40px;
     background-color: #fffadb;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -38,8 +38,11 @@ h2 {
     color: #2d2d2d;
 }
 
-.recipes-title {
-    text-align: center;
+h3.recipes-title {
+    font-family: "rogliano", sans-serif;
+    font-size: 18px;
+    color: #577da1;
+    font-weight: 700;    text-align: center;
     margin-top: 40px;
     padding-top: 20px; /* Ensure some padding to improve visibility */
 }
