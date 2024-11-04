@@ -85,11 +85,12 @@ h3 {
     color: #333;
     border: none;
     border-radius: 4px;
-    padding: 10px 12px;
+    padding: 10px 14px;
     font-size: 14px;
-    margin: 0;
+    margin: -5px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.1s ease;
 }
 
 .ingredient-button.selected.common {
@@ -122,7 +123,7 @@ h3 {
     border-radius: 4px;
     margin: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color 0.1s ease, box-shadow 0.1s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -152,7 +153,7 @@ h3 {
 
 #results li {
     background-color: #ede1cd;
-    padding: 10px;
+    padding: 10px 14px;
     margin: 10px 0;
     font-size: 14px;
     border-radius: 5px;
