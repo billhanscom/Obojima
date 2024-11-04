@@ -53,11 +53,11 @@ h2 {
 
 h3 {
     font-family: "rogliano", sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     color: #23486f;
     font-weight: 700;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #23486f;
     padding-bottom: 15px;
     margin-bottom: 30px;
 }
@@ -85,7 +85,7 @@ h3 {
     color: #333;
     border: none;
     border-radius: 4px;
-    padding: 8px 12px;
+    padding: 2px 12px;
     font-size: 14px;
     margin: 0;
     cursor: pointer;
@@ -153,6 +153,7 @@ h3 {
 #results li {
     background-color: #ede1cd;
     padding: 10px;
+    margin: 10px 0;
     font-size: 14px;
     border-radius: 5px;
     border: 1px solid #e0e0e0;
