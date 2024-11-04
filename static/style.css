@@ -34,6 +34,7 @@ h2 {
     font-weight: 400;
     font-style: normal;    
     font-size: 24px;
+    margin-bottom: 20px;
     color: #777777;
 }
 
@@ -112,7 +113,7 @@ h3 {
 }
 
 .button-group button {
-    background-color: #0077cc;
+    background-color: #65ade8;
     color: #ffffff;
     border: none;
     padding: 10px 18px;
@@ -140,10 +141,8 @@ h3 {
 }
 
 #results h3 {
-    color: #0077cc;
-    font-size: 16px;
+    color: #65ade8;
     text-align: center;
-    margin-bottom: 15px;
 }
 
 #results ul {
@@ -154,6 +153,7 @@ h3 {
 #results li {
     background-color: #f9fafb;
     padding: 10px;
+    font-size: 14px;
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #e0e0e0;
