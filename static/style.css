@@ -142,7 +142,6 @@ h3 {
 }
 
 #results h3 {
-    color: #65ade8;
     text-align: center;
 }
 
@@ -152,7 +151,7 @@ h3 {
 }
 
 #results li {
-    background-color: #f9fafb;
+    background-color: #ede1cd;
     padding: 10px;
     font-size: 14px;
     margin: 10px 0;
