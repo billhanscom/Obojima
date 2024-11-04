@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/rke0sfx.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -29,7 +30,7 @@
                     <h3>Common Ingredients</h3>
                     {% for ingredient in common_ingredients %}
                         <button type="button" class="ingredient-button" data-ingredient="{{ ingredient['name'] }}" data-rarity="common">
-                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}–{{ ingredient['utility'] }}–{{ ingredient['whimsy'] }}]
+                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}-{{ ingredient['utility'] }}-{{ ingredient['whimsy'] }}]
                         </button><br><br>
                     {% endfor %}
                 </div>
@@ -39,7 +40,7 @@
                     <h3>Uncommon Ingredients</h3>
                     {% for ingredient in uncommon_ingredients %}
                         <button type="button" class="ingredient-button" data-ingredient="{{ ingredient['name'] }}" data-rarity="uncommon">
-                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}–{{ ingredient['utility'] }}–{{ ingredient['whimsy'] }}]
+                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}-{{ ingredient['utility'] }}-{{ ingredient['whimsy'] }}]
                         </button><br><br>
                     {% endfor %}
                 </div>
@@ -49,7 +50,7 @@
                     <h3>Rare Ingredients</h3>
                     {% for ingredient in rare_ingredients %}
                         <button type="button" class="ingredient-button" data-ingredient="{{ ingredient['name'] }}" data-rarity="rare">
-                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}–{{ ingredient['utility'] }}–{{ ingredient['whimsy'] }}]
+                            {{ ingredient['name'] }} [{{ ingredient['combat'] }}-{{ ingredient['utility'] }}-{{ ingredient['whimsy'] }}]
                         </button><br><br>
                     {% endfor %}
                 </div>

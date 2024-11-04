@@ -22,9 +22,10 @@ header {
 }
 
 h1 {
-    font-family: 'Abril Fatface', serif;
-    font-size: 58px; /* Larger title size */
-    color: #333333;
+    font-family: "sneakers-pro", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #DCA453;
     margin-bottom: 10px;
 }
 
@@ -43,9 +44,10 @@ h2 {
 }
 
 .recipes-title h2 {
-    font-family: 'Abril Fatface', serif;
-    font-size: 32px; /* "Recipes" section title in Abril Fatface */
-    color: #333333;
+    font-family: "sneakers-pro", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #DCA453;
 }
 
 h3 {
