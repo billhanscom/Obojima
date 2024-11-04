@@ -1,8 +1,8 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "rogliano", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #65ade8;
     color: #2d2d2d;
 }
 
@@ -11,7 +11,7 @@ body {
     max-width: 1000px;
     margin: 60px auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #fffadb;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -23,17 +23,18 @@ header {
 
 h1 {
     font-family: "sneakers-pro", sans-serif;
+    font-size: 48px;
     font-weight: 500;
     font-style: normal;
     color: #DCA453;
-    margin-bottom: 10px;
 }
 
 h2 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "rogliano", sans-serif;
+    font-weight: 400;
+    font-style: normal;    
     font-size: 16px;
     color: #777777;
-    font-weight: normal;
 }
 
 .recipes-title {
@@ -51,10 +52,10 @@ h2 {
 }
 
 h3 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "rogliano", sans-serif;
     font-size: 15px;
     color: #444444;
-    font-weight: bold;
+    font-weight: 700;
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 5px;
@@ -77,7 +78,7 @@ h3 {
 }
 
 .ingredient-button {
-    background-color: #e0e0e0;
+    background-color: #ede1cd;
     color: #333;
     border: none;
     border-radius: 4px;
