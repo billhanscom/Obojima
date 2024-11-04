@@ -142,6 +142,12 @@ h3 {
     width: 32%;
 }
 
+.recipe-column h3 {
+    width: 32%;
+    color: #577da1;
+}
+
+
 #results h3 {
     text-align: center;
 }
