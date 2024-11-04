@@ -154,35 +154,7 @@ h3 {
     background-color: #ede1cd;
     padding: 10px;
     font-size: 14px;
-    margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #e0e0e0;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Rarity-based background colors for ingredients in recipe results */
-.ingredient.common {
-    background-color: #c2e3a7; /* Common: light green */
-}
-
-.ingredient.uncommon {
-    background-color: #fde663; /* Uncommon: yellow */
-}
-
-.ingredient.rare {
-    background-color: #fd8966; /* Rare: coral */
-}
-
-/* Print-friendly styles */
-@media print {
-    body {
-        background-color: #ffffff;
-        color: #000;
-    }
-    #ingredientForm button {
-        display: none; /* Hide buttons during print */
-    }
-    #ingredientForm, .recipe-columns {
-        page-break-inside: avoid;
-    }
 }
