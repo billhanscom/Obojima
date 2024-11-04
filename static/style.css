@@ -38,7 +38,7 @@ h2 {
     color: #2d2d2d;
 }
 
-h3.recipes-title {
+recipes-title {
     font-family: "rogliano", sans-serif;
     font-size: 18px;
     color: #577da1;
@@ -163,4 +163,17 @@ h3 {
     border-radius: 5px;
     border: none;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Rarity-based background colors for ingredients in recipe results */
+.ingredient.common {
+    background-color: #c2e3a7;
+}
+
+.ingredient.uncommon {
+    background-color: #fde663;
+}
+
+.ingredient.rare {
+    background-color: #fd8966;
 }
