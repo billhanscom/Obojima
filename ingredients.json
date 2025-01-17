@@ -42,8 +42,8 @@
     },
     {
         "name": "Boom Beri",
-        "combat": 0,
-        "utility": 3,
+        "combat": 7,
+        "utility": 6,
         "whimsy": 1,
         "rarity": "common",
         "regions": ["Coastal Highlands", "Gift of Shuritashi", "Land of Hot Water", "Mount Arbora"]
