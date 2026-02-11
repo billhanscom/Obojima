@@ -51,7 +51,7 @@
     {
         "name": "Bora Bug",
         "combat": 4,
-        "utility": 8,
+        "utility": 3,
         "whimsy": 3,
         "rarity": "common",
         "regions": ["Brackwater Wetlands", "Coastal Highlands", "Gale Fields", "Gift of Shuritashi", "Mount Arbora"]
@@ -60,7 +60,7 @@
         "name": "Brush Reed",
         "combat": 1,
         "utility": 10,
-        "whimsy": 6,
+        "whimsy": 3,
         "rarity": "common",
         "regions": ["Brackwater Wetlands", "Land of Hot Water", "The Shallows"]
     },
@@ -425,18 +425,18 @@
         "regions": ["Brackwater Wetlands", "Gift of Shuritashi"]
     },
     {
-        "name": "Seashell",
-        "combat": 0,
+        "name": "Sea Water",
+        "combat": 1,
         "utility": 0,
-        "whimsy": 1,
+        "whimsy": 0,
         "rarity": "common",
         "regions": ["Brackwater Wetlands", "Gift of Shuritashi", "Land of Hot Water", "The Shallows"]
     },
     {
-        "name": "Seawater",
-        "combat": 1,
+        "name": "Seashell",
+        "combat": 0,
         "utility": 0,
-        "whimsy": 0,
+        "whimsy": 1,
         "rarity": "common",
         "regions": ["Brackwater Wetlands", "Gift of Shuritashi", "Land of Hot Water", "The Shallows"]
     },
@@ -457,42 +457,42 @@
         "regions": ["Coastal Highlands"]
     },
     {
-        "name": "Spindle Leg Spider Webs",
-        "combat": 5,
-        "utility": 9,
-        "whimsy": 6,
+        "name": "Spindle-Leg Spider Webs",
+        "combat": 8,
+        "utility": 6,
+        "whimsy": 7,
         "rarity": "common",
         "regions": ["Coastal Highlands", "Gale Fields", "Gift of Shuritashi"]
     },
     {
         "name": "Spirit Root",
-        "combat": 6,
-        "utility": 0,
-        "whimsy": 9,
+        "combat": 3,
+        "utility": 2,
+        "whimsy": 3,
         "rarity": "common",
         "regions": ["Mount Arbora"]
     },
     {
         "name": "Squid Ink",
-        "combat": 4,
-        "utility": 9,
-        "whimsy": 7,
+        "combat": 5,
+        "utility": 1,
+        "whimsy": 9,
         "rarity": "common",
         "regions": ["The Shallows"]
     },
     {
         "name": "Tangle Weed",
-        "combat": 8,
-        "utility": 8,
-        "whimsy": 4,
+        "combat": 9,
+        "utility": 3,
+        "whimsy": 8,
         "rarity": "common",
         "regions": ["The Shallows"]
     },
     {
         "name": "Ube",
-        "combat": 2,
-        "utility": 6,
-        "whimsy": 5,
+        "combat": 10,
+        "utility": 5,
+        "whimsy": 4,
         "rarity": "common",
         "regions": ["Gale Fields"]
     },
@@ -807,7 +807,7 @@
         "regions": ["The Shallows"]
     },
     {
-        "name": "Rubble from a Rubble Golem",
+        "name": "Rubble Golem's Rubble",
         "combat": 16,
         "utility": 11,
         "whimsy": 15,
@@ -1037,7 +1037,7 @@
         "name": "Starstone",
         "combat": 18,
         "utility": 0,
-        "whimsy": 19,
+        "whimsy": 20,
         "rarity": "rare"
     },
     {
