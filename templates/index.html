@@ -19,7 +19,6 @@
         <div class="button-group">
             <button type="button" onclick="findRecipes()">Find Recipes</button>
             <button type="button" onclick="clearSelection()">Clear Selection</button>
-            <button type="button" id="values-toggle-button" class="values-toggle-button" onclick="toggleValuesYear()">Use 2014 Values</button>
         </div>
 
         <!-- Ingredient selection form -->
@@ -60,13 +59,18 @@
             <div class="button-group">
                 <button type="button" onclick="findRecipes()">Find Recipes</button>
                 <button type="button" onclick="clearSelection()">Clear Selection</button>
-                <button type="button" class="values-toggle-button" onclick="toggleValuesYear()">Use 2014 Values</button>
             </div>
         </form>
 
         <div id="results" class="recipe-columns">
             <!-- Results will be displayed in this section -->
         </div>
+
+        <footer class="site-footer">
+            <p>Created by Urameshiya</p>
+            <p><a href="https://discord.gg/ZfdtQeAqV" target="_blank" rel="noopener noreferrer">Report any errors on the Obojima Discord server.</a></p>
+        </footer>
+
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
